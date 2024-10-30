@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>My Private GitHub Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Hello, World!</h1>
@@ -12,7 +13,7 @@
                 <div>
                     <div>Tokens:</div>
                     <div>________</div>
-                    <div><button type="button">Click Me</button></div>
+                    <div><button type="button" id="butn" ondblclick="generateToken()">Click Me</button></div>
                 </div>
             </div>
         </div>
@@ -20,8 +21,35 @@
 </body>
 
 <script>
-    document.readyState(function(){
-        alert("Testing...");
+
+    function generateToken() {
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const numbers = '0123456789';
+        
+        function getRandomString(length, characters) {
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+        let part1, part2, part3;
+        if(getRandomString(3, numbers)%2 == 0){
+            part1 = getRandomString(3, letters); // Generate 3 random letters
+            part2 = getRandomString(3, numbers); // Generate 3 random numbers
+            part3 = getRandomString(3, letters); // Generate 3 random letters
+        } else {
+            part2 = getRandomString(3, letters); // Generate 3 random letters
+            part3 = getRandomString(3, numbers); // Generate 3 random numbers
+            part1 = getRandomString(3, letters); // Generate 3 random letters
+        }
+            
+        $("#butn").parent().parent().children().eq(1).html(`${part1}-${part2}-${part3}`)
+        return `${part1}-${part2}-${part3}`;
+    }
+
+    $('document').ready(function() {
+        generateToken();
     })
 </script>
 
