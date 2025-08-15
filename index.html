@@ -1,59 +1,300 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>My Private GitHub Page</title>
+  <head>
+    <title>Automation Candidate Practical Test</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <style>
+      .hidden {
+        display: none;
+      }
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+
+      /* General page styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+
+      h1 {
+        color: #1a73e8;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      /* Container */
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Button style */
+      button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #155bb5;
+      }
+
+      /* Input fields */
+      input[type="text"],
+      input[type="date"],
+      input[type="email"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px 0 15px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      /* Table styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f5f5f5;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Hello, Candidate!</h1>
-    <p>Here's a Simple Task.</p>
-    <p>Identify the XPATH on the Tokens.</p>
+    <h2>Complete the following automation tasks.</h2>
+
+    <!-- Token Task -->
+    <h3>1. Token Generation (Double-click button)</h3>
     <div>
-        <div>
-            <p>
-            <div>
-                <div>
-                    <div>Tokens:</div>
-                    <div>________</div>
-                    <div><button type="button" id="butn" ondblclick="generateToken()">Click Me</button></div>
-                </div>
-            </div>
-            </p>
-        </div>
+      <div>Tokens:</div>
+      <div>________</div>
+      <div>
+        <button type="button" id="butn" ondblclick="generateToken(this)">
+        Double-Click Me
+        </button>
+      </div>
     </div>
-</body>
 
-<script>
+    <!-- Dynamic Table Task -->
+    <h3>2. Dynamic Table</h3>
+    <button id="updateTable">Update Table</button>
+    <table id="dynamicTable">
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </table>
 
-    function generateToken() {
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const numbers = '0123456789';
-        
-        function getRandomString(length, characters) {
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return result;
-        }
+    <!-- Hidden Element Task -->
+    <h3>3. Hidden Element</h3>
+    <button id="showSecret">Show Secret</button>
+    <p id="secretText" class="hidden">🎯 Secret Code: 42XYZ</p>
+
+    <!-- Form Validation Task -->
+    <h3>4. Form Submission</h3>
+    <form id="testForm">
+      <label>Name: <input type="text" name="name" /></label>
+      <label>Email: <input type="email" name="email" /></label>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="formMessage"></p>
+
+    <select id="country">
+      <option value="">Select Country</option>
+      <option value="IN">India</option>
+      <option value="US">USA</option>
+      <option value="DE">Germany</option>
+      <option value="AU">Australia</option>
+      <option value="UK">United Kingdom</option>
+    </select>
+
+    <select id="city">
+      <option value="">Select City</option>
+    </select>
+
+    <!-- Popup Alert Task -->
+    <h3>6. Random Popup</h3>
+    <p>⚠ Be ready — a popup may appear randomly.</p>
+
+    <script>
+      // Token generator
+      function generateToken(element) {
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numbers = "0123456789";
+        const getRandomString = (len, chars) =>
+          Array.from(
+            { length: len },
+            () => chars[Math.floor(Math.random() * chars.length)]
+          ).join("");
+
+        let numCheck = parseInt(getRandomString(3, numbers));
         let part1, part2, part3;
-        if(getRandomString(3, numbers)%2 == 0){
-            part1 = getRandomString(3, letters); // Generate 3 random letters
-            part2 = getRandomString(3, numbers); // Generate 3 random numbers
-            part3 = getRandomString(3, letters); // Generate 3 random letters
+        if (numCheck % 2 === 0) {
+          part1 = getRandomString(3, letters);
+          part2 = getRandomString(3, numbers);
+          part3 = getRandomString(3, letters);
         } else {
-            part2 = getRandomString(3, letters); // Generate 3 random letters
-            part3 = getRandomString(3, numbers); // Generate 3 random numbers
-            part1 = getRandomString(3, letters); // Generate 3 random letters
+          part2 = getRandomString(3, letters);
+          part3 = getRandomString(3, numbers);
+          part1 = getRandomString(3, letters);
         }
-            
-        $("#butn").parent().parent().children().eq(1).html(`${part1}-${part2}-${part3}`)
-        return `${part1}-${part2}-${part3}`;
-    }
+        $(element).parent().parent().find('div').eq(1).text(`${part1}-${part2}-${part3}`);
+      }
 
-    $('document').ready(function() {
+      // Dynamic table update
+      $("#updateTable").click(function () {
+        const names = ["Alice", "Bob", "Charlie", "Diana"];
+        $("#dynamicTable tr:gt(0)").remove();
+        for (let i = 0; i < 4; i++) {
+          $("#dynamicTable").append(
+            `<tr><td>${names[i]}</td><td>${Math.floor(
+              Math.random() * 100
+            )}</td></tr>`
+          );
+        }
+      });
+
+      // Hidden element
+      $("#showSecret").click(function () {
+        $("#secretText").toggleClass("hidden");
+      });
+
+      // Form validation
+      $("#testForm").submit(function (e) {
+        e.preventDefault();
+        const name = $(this).find("input[name='name']").val();
+        const email = $(this).find("input[name='email']").val();
+        if (name && email) {
+          $("#formMessage").text("✅ Form submitted successfully!");
+        } else {
+          $("#formMessage").text("❌ Please fill out all fields.");
+        }
+      });
+
+      // Dependent dropdowns
+      $("#country").change(function () {
+        let cities = {
+          IN: [
+            "Delhi",
+            "Mumbai",
+            "Bangalore",
+            "Chennai",
+            "Kolkata",
+            "Hyderabad",
+            "Pune",
+          ],
+          US: [
+            "New York",
+            "Chicago",
+            "Los Angeles",
+            "Houston",
+            "Phoenix",
+            "Philadelphia",
+            "San Antonio",
+          ],
+          DE: [
+            "Berlin",
+            "Munich",
+            "Hamburg",
+            "Frankfurt",
+            "Cologne",
+            "Stuttgart",
+          ],
+          AU: [
+            "Sydney",
+            "Melbourne",
+            "Brisbane",
+            "Perth",
+            "Adelaide",
+            "Canberra",
+          ],
+          UK: [
+            "London",
+            "Manchester",
+            "Birmingham",
+            "Leeds",
+            "Glasgow",
+            "Liverpool",
+          ],
+        };
+
+        // Clear and reset city dropdown
+        $("#city").empty().append(`<option value="">Select City</option>`);
+
+        // Add cities for selected country
+        (cities[$(this).val()] || []).forEach((c) => {
+          $("#city").append(`<option value="${c}">${c}</option>`);
+        });
+      });
+
+      // Random popup
+      setTimeout(function () {
+        if (Math.random() > 0.5) {
+          alert("🚨 Random Popup! Handle me.");
+        }
+      }, Math.random() * 10000);
+
+      $(document).ready(function () {
         generateToken();
-    })
-</script>
+        $("#updateTable").click();
+      });
 
+      $(document).ready(function () {
+        $("#country").select2({
+          placeholder: "-- Country --",
+          allowClear: true,
+          width: "500px",
+        });
+        $("#city").select2({
+          placeholder: "-- City --",
+          allowClear: true,
+          width: "500px",
+        });
+      });
+    </script>
+  </body>
 </html>
