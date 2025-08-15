@@ -121,7 +121,7 @@ Access the live version of the test here: [Open Automation Test Page](https://ni
 For questions, feedback, or collaboration, feel free to reach out:
 - Name: Nithyanandhan V
 - Email: nithyanandha.velliyangiri@gmail.com
-- GitHub: [your-github-profile](https://github.com/NickolusAlex)
+- GitHub: [Nithyanandhan-Profile](https://github.com/NickolusAlex)
 
 ---
 
